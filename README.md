@@ -85,7 +85,7 @@ Develop a full-stack application that allows users to upload PDF documents and a
 ### **1. Backend Setup**
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:haniyakonain/file-interact.git
    cd backend
    ```
 2. Create a virtual environment:
