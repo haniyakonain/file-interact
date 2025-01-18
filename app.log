@@ -146,3 +146,22 @@
 2025-01-18 01:47:13,734 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 400 Bad Request"
 2025-01-18 01:47:13,734 - main - ERROR - Claude API error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}
 2025-01-18 01:47:13,735 - main - ERROR - Question answering error: 500: Error getting response from Claude: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}
+2025-01-18 18:55:15,605 - main - INFO - Loading environment variables...
+2025-01-18 18:55:15,606 - main - INFO - Initializing Anthropic client...
+2025-01-18 18:55:15,642 - main - INFO - Anthropic client initialized successfully
+2025-01-18 18:55:15,686 - main - INFO - Database initialized successfully with corrected schema
+2025-01-18 18:57:43,458 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 400 Bad Request"
+2025-01-18 18:57:43,460 - main - ERROR - Claude API error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}
+2025-01-18 18:57:43,460 - main - ERROR - Question answering error: 500: Error getting response from Claude: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}
+2025-01-18 18:59:32,096 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 400 Bad Request"
+2025-01-18 18:59:32,097 - main - ERROR - Claude API error: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}
+2025-01-18 18:59:32,097 - main - ERROR - Question answering error: 500: Error getting response from Claude: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}}
+2025-01-18 19:04:45,391 - main - INFO - Loading environment variables...
+2025-01-18 19:04:45,392 - main - ERROR - ANTHROPIC_API_KEY not found in environment variables
+2025-01-18 19:06:26,916 - main - INFO - Loading environment variables...
+2025-01-18 19:06:26,917 - main - INFO - Initializing Anthropic client...
+2025-01-18 19:06:26,951 - main - INFO - Anthropic client initialized successfully
+2025-01-18 19:06:26,959 - main - INFO - Database initialized successfully with corrected schema
+2025-01-18 19:08:38,721 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 401 Unauthorized"
+2025-01-18 19:08:38,722 - main - ERROR - Claude API error: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}}
+2025-01-18 19:08:38,722 - main - ERROR - Question answering error: 500: Error getting response from Claude: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}}
