@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Theme Layer */
+@layer base {
+  :root {
+    /* Color Variables */
+    --background: 0 0% 100%; /* Light: White */
+    --foreground: 222.2 84% 4.9%; /* Light: Dark Text */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    /* Primary & Secondary Colors */
+    --primary: 222.2 47.4% 11.2%; /* Light: Dark Blue */
+    --primary-foreground: 210 40% 98%; /* Light: White */
+    --secondary: 210 40% 96.1%; /* Light: Light Blue */
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    /* Supporting Colors */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%; /* Light: Red */
+    --destructive-foreground: 210 40% 98%; /* Light: White */
+
+    /* Border, Input, and Ring Colors */
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%; /* Focus Ring */
+
+    /* Border Radius */
+    --radius: 0.5rem; /* Default 8px */
+  }
+
+  /* Dark Mode Theme */
+  .dark {
+    /* Color Variables */
+    --background: 222.2 84% 4.9%; /* Dark: Black */
+    --foreground: 210 40% 98%; /* Dark: Light Text */
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Primary & Secondary Colors */
+    --primary: 210 40% 98%; /* Dark: White */
+    --primary-foreground: 222.2 47.4% 11.2%; /* Dark: Dark Text */
+    --secondary: 217.2 32.6% 17.5%; /* Dark: blackish Blue */
+    --secondary-foreground: 210 40% 98%; /* Dark: Light Text */
+
+    /* Supporting Colors */
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%; /* Dark: Dark Red */
+    --destructive-foreground: 210 40% 98%; /* Dark: Light Text */
+
+    /* Border, Input, and Ring Colors */
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%; /* Subtle Focus Ring */
+  }
+}
