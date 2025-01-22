@@ -165,3 +165,7 @@
 2025-01-18 19:08:38,721 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 401 Unauthorized"
 2025-01-18 19:08:38,722 - main - ERROR - Claude API error: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}}
 2025-01-18 19:08:38,722 - main - ERROR - Question answering error: 500: Error getting response from Claude: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}}
+2025-01-22 18:58:50,415 - main - INFO - Loading environment variables...
+2025-01-22 18:58:50,415 - main - INFO - Initializing Anthropic client...
+2025-01-22 18:58:50,462 - main - INFO - Anthropic client initialized successfully
+2025-01-22 18:58:50,476 - main - INFO - Database initialized successfully with corrected schema

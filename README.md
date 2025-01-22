@@ -118,29 +118,6 @@ Develop a full-stack application that allows users to upload PDF documents and a
 
 ---
 
-## **Assignment Deliverables**
-1. **Source Code**:
-   - Well-structured, appropriately commented code for both backend and frontend.
-
-2. **Documentation**:
-   - Include setup instructions and API documentation.
-   - Briefly explain the application architecture.
-
-3. **Demo**:
-   - Live demo or screencast showcasing:
-     - PDF upload functionality.
-     - Question answering feature.
-     - Intuitive user interface.
-
----
-
-## **Evaluation Criteria**
-- **Functionality**: Meets functional and non-functional requirements.
-- **Code Quality**: Clean, organized, and well-documented code.
-- **Design & UX**: Intuitive and user-friendly interface.
-- **Innovation**: Additional features or improvements that enhance the application.
-
----
 
 ## **Additional Notes**
 - The application uses local storage for storing uploaded PDFs and metadata, ensuring ease of setup without relying on cloud services.

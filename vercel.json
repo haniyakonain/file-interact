@@ -2,29 +2,15 @@
     "version": 2,
     "builds": [
       {
-        "src": "frontend/package.json",
-        "use": "@vercel/react"
-      },
-      {
-        "src": "backend/main.py",
-        "use": "@vercel/python",
-        "config": {
-          "maxLambdaSize": "50mb"
-        }
+        "src": "package.json",
+        "use": "@vercel/node"
       }
     ],
     "routes": [
       {
-        "src": "/api/(.*)",
-        "dest": "backend/$1"
-      },
-      {
         "src": "/(.*)",
-        "dest": "frontend/$1"
+        "dest": "/index.html"
       }
-    ],
-    "env": {
-      "API_URL": "https://your-vercel-deployment-url/api"
-    }
+    ]
   }
   

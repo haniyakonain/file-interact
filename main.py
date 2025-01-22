@@ -16,9 +16,9 @@ from contextlib import contextmanager
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    filename='app.log'
+   level=logging.INFO,
+   format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+   filename='app.log'
 )
 logger = logging.getLogger(__name__)
 
@@ -29,8 +29,8 @@ load_dotenv()
 # Environment Configuration
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 if not ANTHROPIC_API_KEY:
-    logger.error("ANTHROPIC_API_KEY not found in environment variables")
-    raise ValueError("ANTHROPIC_API_KEY is not set in the environment or .env file.")
+   logger.error("ANTHROPIC_API_KEY not found in environment variables")
+   raise ValueError("ANTHROPIC_API_KEY is not set in the environment or .env file.")
 
 # Constants
 UPLOAD_DIR = "uploaded_files"
@@ -43,35 +43,40 @@ CHUNK_SIZE = 4096  # Chunk size for file reading
 anthropic_client = None
 
 def initialize_anthropic():
-    """Initialize the Anthropic client globally."""
-    global anthropic_client
-    try:
-        logger.info("Initializing Anthropic client...")
-        anthropic_client = Anthropic(api_key=ANTHROPIC_API_KEY)
-        logger.info("Anthropic client initialized successfully")
-    except Exception as e:
-        logger.error(f"Anthropic client initialization error: {str(e)}")
-        raise ValueError(f"Failed to initialize Anthropic client: {str(e)}")
+   """Initialize the Anthropic client globally."""
+   global anthropic_client
+   try:
+       logger.info("Initializing Anthropic client...")
+       anthropic_client = Anthropic(api_key=ANTHROPIC_API_KEY)
+       logger.info("Anthropic client initialized successfully")
+   except Exception as e:
+       logger.error(f"Anthropic client initialization error: {str(e)}")
+       raise ValueError(f"Failed to initialize Anthropic client: {str(e)}")
 
 # Initialize Anthropic client
 initialize_anthropic()
 
 # FastAPI app setup
 app = FastAPI(
-    title="PDF Question Answering System",
-    description="API for uploading PDFs and asking questions about their content",
-    version="1.1.0",
-    docs_url="/api/docs",
-    redoc_url="/api/redoc"
+   title="PDF Question Answering System",
+   description="API for uploading PDFs and asking questions about their content",
+   version="1.1.0",
+   docs_url="/api/docs",
+   redoc_url="/api/redoc"
 )
 
 # CORS setup
+origins = [
+   "https://your-vercel-frontend-url.vercel.app",  # Production
+   "http://localhost:3000",  # Local development
+]
+
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+   CORSMiddleware,
+   allow_origins=origins,
+   allow_credentials=True,
+   allow_methods=["*"],
+   allow_headers=["*"],
 )
 
 # Create directories
