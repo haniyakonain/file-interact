@@ -16,9 +16,9 @@ from contextlib import contextmanager
 
 # Configure logging
 logging.basicConfig(
-   level=logging.INFO,
-   format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-   filename='app.log'
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename='/tmp/app.log'  # Updated to write logs to /tmp folder
 )
 logger = logging.getLogger(__name__)
 
@@ -29,8 +29,8 @@ load_dotenv()
 # Environment Configuration
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 if not ANTHROPIC_API_KEY:
-   logger.error("ANTHROPIC_API_KEY not found in environment variables")
-   raise ValueError("ANTHROPIC_API_KEY is not set in the environment or .env file.")
+    logger.error("ANTHROPIC_API_KEY not found in environment variables")
+    raise ValueError("ANTHROPIC_API_KEY is not set in the environment or .env file.")
 
 # Constants
 UPLOAD_DIR = "uploaded_files"
@@ -43,40 +43,40 @@ CHUNK_SIZE = 4096  # Chunk size for file reading
 anthropic_client = None
 
 def initialize_anthropic():
-   """Initialize the Anthropic client globally."""
-   global anthropic_client
-   try:
-       logger.info("Initializing Anthropic client...")
-       anthropic_client = Anthropic(api_key=ANTHROPIC_API_KEY)
-       logger.info("Anthropic client initialized successfully")
-   except Exception as e:
-       logger.error(f"Anthropic client initialization error: {str(e)}")
-       raise ValueError(f"Failed to initialize Anthropic client: {str(e)}")
+    """Initialize the Anthropic client globally."""
+    global anthropic_client
+    try:
+        logger.info("Initializing Anthropic client...")
+        anthropic_client = Anthropic(api_key=ANTHROPIC_API_KEY)
+        logger.info("Anthropic client initialized successfully")
+    except Exception as e:
+        logger.error(f"Anthropic client initialization error: {str(e)}")
+        raise ValueError(f"Failed to initialize Anthropic client: {str(e)}")
 
 # Initialize Anthropic client
 initialize_anthropic()
 
 # FastAPI app setup
 app = FastAPI(
-   title="PDF Question Answering System",
-   description="API for uploading PDFs and asking questions about their content",
-   version="1.1.0",
-   docs_url="/api/docs",
-   redoc_url="/api/redoc"
+    title="PDF Question Answering System",
+    description="API for uploading PDFs and asking questions about their content",
+    version="1.1.0",
+    docs_url="/api/docs",
+    redoc_url="/api/redoc"
 )
 
 # CORS setup
 origins = [
-   "https://your-vercel-frontend-url.vercel.app",  # Production
-   "http://localhost:3000",  # Local development
+    "https://your-vercel-frontend-url.vercel.app",  # Production
+    "http://localhost:3000",  # Local development
 ]
 
 app.add_middleware(
-   CORSMiddleware,
-   allow_origins=origins,
-   allow_credentials=True,
-   allow_methods=["*"],
-   allow_headers=["*"],
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Create directories
@@ -299,89 +299,12 @@ async def ask_question(request: QuestionRequest):
             "document": filename,
             "timestamp": datetime.now().isoformat()
         }
-        
+    
     except Exception as e:
-        logger.error(f"Question answering error: {str(e)}")
-        if "invalid_api_key" in str(e).lower():
-            raise HTTPException(status_code=401, detail="Invalid Anthropic API key")
+        logger.error(f"Ask question error: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/documents", response_model=List[DocumentInfo])
-async def list_documents():
-    """List all documents with their metadata"""
-    try:
-        with get_db_connection() as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                SELECT 
-                    id, 
-                    filename, 
-                    upload_date, 
-                    file_size,
-                    page_count
-                FROM documents 
-                ORDER BY upload_date DESC
-            """)
-            results = cursor.fetchall()
-            return [dict(row) for row in results]
-    except Exception as e:
-        logger.error(f"Error listing documents: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.get("/documents/{document_id}", response_model=DocumentInfo)
-async def get_document(document_id: str):
-    """Get specific document metadata"""
-    try:
-        with get_db_connection() as conn:
-            cursor = conn.cursor()
-            cursor.execute("""
-                SELECT 
-                    id, 
-                    filename, 
-                    upload_date, 
-                    file_size,
-                    page_count
-                FROM documents 
-                WHERE id = ?
-            """, (document_id,))
-            result = cursor.fetchone()
-            
-            if not result:
-                raise HTTPException(status_code=404, detail="Document not found")
-            
-            return dict(result)
-    except Exception as e:
-        logger.error(f"Error retrieving document: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
-@app.delete("/documents/{document_id}")
-async def delete_document(document_id: str):
-    """Delete a document and its associated file."""
-    try:
-        with get_db_connection() as conn:
-            cursor = conn.cursor()
-            cursor.execute("SELECT file_path FROM documents WHERE id = ?", (document_id,))
-            result = cursor.fetchone()
-            
-            if not result:
-                raise HTTPException(status_code=404, detail="Document not found")
-            
-            file_path = result['file_path']
-            
-            # Delete file
-            if os.path.exists(file_path):
-                os.remove(file_path)
-            
-            # Delete database record
-            cursor.execute("DELETE FROM documents WHERE id = ?", (document_id,))
-            conn.commit()
-            
-            return {"message": "Document deleted successfully"}
-            
-    except Exception as e:
-        logger.error(f"Document deletion error: {str(e)}")
-        raise HTTPException(status_code=500, detail=str(e))
-
+# Run app locally (in development environment)
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
